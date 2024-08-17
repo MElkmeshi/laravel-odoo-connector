@@ -1,0 +1,25 @@
+{
+    "name": "sefirosweb/laravel-odoo-connector",
+    "description": "Driver to connect Odoo using ORM of laravel",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Sefirosweb\\LaravelOdooConnector\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sefirosweb",
+            "email": "sefirosweb@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sefirosweb\\LaravelOdooConnector\\LaravelOdooConnectorServiceProvider"
+            ]
+        }
+    }
+}
