@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Sefirosweb\LaravelOdooConnector\Commands;
 
 use Illuminate\Console\Command;
+use Sefirosweb\LaravelOdooConnector\Http\Models\MrpBom;
+use Sefirosweb\LaravelOdooConnector\Http\Models\MrpBomLine;
 use Sefirosweb\LaravelOdooConnector\Http\Models\ProductProduct;
 
 class TestOdooConnection extends Command
@@ -76,6 +78,21 @@ class TestOdooConnection extends Command
 
         $f = ProductProduct::find(5766);
         $p = $f->product_template->purchase_ok;
+
+        $mrp_bom = MrpBom::find(20);
+        $mrp_bom_line = $mrp_bom->mrp_bom_lines->first();
+
+        if ($mrp_bom_line) {
+            $mrp_bom_line->product_qty = 1;
+            $mrp_bom_line->save();
+            $mrp_bom_line->delete();
+        }
+
+        $mrp_bom_line = new MrpBomLine();
+        $mrp_bom_line->product_id = 5765;
+        $mrp_bom_line->product_qty = 1;
+        $mrp_bom_line->mrp_bom()->associate($mrp_bom);
+        $mrp_bom_line->save();
 
         return Command::SUCCESS;
     }

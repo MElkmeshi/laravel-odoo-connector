@@ -11,7 +11,6 @@ class OdooGrammar extends BaseGrammar
 {
     public function compileSelect(Builder $query)
     {
-        $sql = parent::compileSelect($query);
         $columns = $query->columns;
 
         if (empty($columns)) {
@@ -22,16 +21,68 @@ class OdooGrammar extends BaseGrammar
             $columns = [];
         }
 
-        $filters = $this->convertWheresToOdooFilters($query, $query->wheres);
+        $params = $this->convertWheresToOdooFilters($query, $query->wheres);
 
         $jsonRpc = [
             'model' => $query->from,
             'operation' => 'search_read',
-            'filters' => [$filters],
+            'params' => [$params],
             'object' => [
                 'fields' => $columns,
                 'limit' => $query->limit,
             ],
+        ];
+
+        return $jsonRpc;
+    }
+
+    public function compileInsert(Builder $query, array $values)
+    {
+        $jsonRpc = [
+            'model' => $query->from,
+            'operation' => 'create',
+            'params' => [$values],
+            'object' => [],
+        ];
+
+        return $jsonRpc;
+    }
+
+    public function compileUpdate(Builder $query, array $values)
+    {
+        $ids = [];
+
+        foreach ($query->wheres as $where) {
+            if ($where['type'] === 'Basic' && $where['operator'] === '=' && $where['column'] === 'id') {
+                $ids[] = $where['value'];
+            }
+        }
+
+        $jsonRpc = [
+            'model' => $query->from,
+            'operation' => 'write',
+            'params' => [$ids, $values],
+            'object' => [],
+        ];
+
+        return $jsonRpc;
+    }
+
+    public function compileDelete(Builder $query)
+    {
+        $ids = [];
+
+        foreach ($query->wheres as $where) {
+            if ($where['type'] === 'Basic' && $where['operator'] === '=' && $where['column'] === 'id') {
+                $ids[] = $where['value'];
+            }
+        }
+
+        $jsonRpc = [
+            'model' => $query->from,
+            'operation' => 'unlink',
+            'params' => [$ids],
+            'object' => [],
         ];
 
         return $jsonRpc;

@@ -41,14 +41,14 @@ class OdooJsonRpc
         return $instance->conections[$connection];
     }
 
-    public static function execute_kw_get_all($model, $operation, $filters = [], $object = [], $chunks = 500)
+    public static function execute_kw_get_all($model, $operation, $params = [], $object = [], $chunks = 500)
     {
         $offset = 0;
         $limit = $chunks;
         $resultData = [];
 
         while (true) {
-            $data = self::execute_kw($model, $operation, $filters, array_merge($object, [
+            $data = self::execute_kw($model, $operation, $params, array_merge($object, [
                 'offset' => $offset,
                 'limit' => $limit
             ]));
@@ -64,7 +64,7 @@ class OdooJsonRpc
         return $resultData;
     }
 
-    public static function execute_kw($model, $operation, $filters = [], $object = [], $connection = 'odoo', $cache = false)
+    public static function execute_kw($model, $operation, $params = [], $object = [], $connection = 'odoo', $cache = false)
     {
         $connection = self::get_connection($connection);
         $timeout = $connection->defaultOptions['timeout'] ?? 20;
@@ -85,7 +85,7 @@ class OdooJsonRpc
                     $connection->password,
                     $model,
                     $operation,
-                    $filters,
+                    $params,
                     $object
                 ]
             ]

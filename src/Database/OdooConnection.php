@@ -14,7 +14,7 @@ class OdooConnection extends Connection
         $data = OdooJsonRpc::execute_kw(
             $query['model'],
             $query['operation'],
-            $query['filters'],
+            $query['params'],
             $query['object'],
             $this->config['conection']
         );
@@ -38,16 +38,45 @@ class OdooConnection extends Connection
 
     public function insert($query, $bindings = [])
     {
-        throw new \Exception('Not implemented yet');
+        $data = OdooJsonRpc::execute_kw(
+            $query['model'],
+            $query['operation'],
+            $query['params'],
+            $query['object'],
+            $this->config['conection']
+        );
+
+        return $data;
     }
 
     public function update($query, $bindings = [])
     {
-        throw new \Exception('Not implemented yet');
+        $data = OdooJsonRpc::execute_kw(
+            $query['model'],
+            $query['operation'],
+            $query['params'],
+            $query['object'],
+            $this->config['conection']
+        );
+
+        return $data;
     }
 
     public function delete($query, $bindings = [])
     {
-        throw new \Exception('Not implemented yet');
+        $data = OdooJsonRpc::execute_kw(
+            $query['model'],
+            $query['operation'],
+            $query['params'],
+            $query['object'],
+            $this->config['conection']
+        );
+
+        return $data;
+    }
+
+    protected function getDefaultPostProcessor()
+    {
+        return new OdooProcessor;
     }
 }
