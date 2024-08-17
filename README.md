@@ -22,4 +22,23 @@ Driver to connect Odoo using ORM of laravel
         ],
 
     ],
-´´´
+```
+
+## Publish config, to make override of Odoo Models
+
+```bash
+php artisan vendor:publish --provider="Sefirosweb\LaravelOdooConnector\LaravelOdooConnectorServiceProvider"  --tag=config --force
+```
+
+With that you can add more relations or edit them, configure your own models, in the file `config/laravel-odoo-connector.php`
+
+```php
+
+return [
+    'ProductProduct' => Sefirosweb\LaravelOdooConnector\Http\Models\ProductProduct::class,
+    'ProductTemplate' => Sefirosweb\LaravelOdooConnector\Http\Models\ProductTemplate::class,
+    'ResLang' => Sefirosweb\LaravelOdooConnector\Http\Models\ResLang::class,
+    ///...
+];
+
+```

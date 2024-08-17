@@ -19,6 +19,12 @@ class LaravelOdooConnectorServiceProvider extends ServiceProvider
             ]);
         }
 
+        $this->mergeConfigFrom(__DIR__ . '/config/config.php', 'laravel-odoo-connector');
+
+        $this->publishes([
+            __DIR__ . '/config/config.php' => config_path('laravel-odoo-connector.php'),
+        ], 'config');
+
         DB::extend('odoo', function ($config, $conection) {
             $config['conection'] = $conection;
             return (new OdooConnector)->connect($config);
