@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Cache;
 
 class OdooJsonRpc
 {
+    private static $id = 0;
     private static $instance;
     public $conections = [];
 
@@ -43,6 +44,7 @@ class OdooJsonRpc
 
     public static function execute_kw($model, $operation, $params = [], $object = [], $connection = 'odoo', $cache = false)
     {
+        self::$id++;
         $connection = self::get_connection($connection);
         $timeout = $connection->defaultOptions['timeout'] ?? 20;
 
@@ -65,7 +67,8 @@ class OdooJsonRpc
                     $params,
                     $object
                 ]
-            ]
+            ],
+            "id" => self::$id
         ];
 
         if ($cache) {
