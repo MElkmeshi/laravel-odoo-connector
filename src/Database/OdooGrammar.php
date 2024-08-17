@@ -11,6 +11,7 @@ class OdooGrammar extends BaseGrammar
 {
     public function compileSelect(Builder $query)
     {
+        // $oldSql = parent::compileSelect($query);
         $columns = $query->columns;
 
         if (empty($columns)) {
@@ -30,6 +31,7 @@ class OdooGrammar extends BaseGrammar
             'object' => [
                 'fields' => $columns,
                 'limit' => $query->limit,
+                'offset' => $query->offset,
             ],
         ];
 
@@ -97,7 +99,6 @@ class OdooGrammar extends BaseGrammar
     public function convertWheresToOdooFilters(Builder $query, array $wheres)
     {
         $filters = [];
-        $orFilters = [];
 
         foreach ($wheres as $where) {
             switch ($where['type']) {
@@ -128,7 +129,12 @@ class OdooGrammar extends BaseGrammar
                 case 'Nested':
                     $nestedFilters = $this->convertWheresToOdooFilters($query, $where['query']->wheres);
                     if ($where['boolean'] === 'or') {
-                        $orFilters[] = ['|', ...$nestedFilters];
+                        $filters = array_merge(
+                            array_slice($filters, 0, -1),
+                            ['|'],
+                            array_slice($filters, -1, 1),
+                            $nestedFilters
+                        );
                     } else {
                         $filters = array_merge($filters, $nestedFilters);
                     }
@@ -138,8 +144,12 @@ class OdooGrammar extends BaseGrammar
             }
 
             if ($where['boolean'] === 'or') {
-                array_unshift($filters, '|');
-                $filters[] = $filter;
+                $filters = array_merge(
+                    array_slice($filters, 0, -1),
+                    ['|'],
+                    array_slice($filters, -1, 1),
+                    [$filter]
+                );
             } else {
                 $filters[] = $filter;
             }
