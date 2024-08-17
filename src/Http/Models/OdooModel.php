@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class OdooModel extends Model
 {
     protected $connection = 'odoo';
+    public $timestamps = false;
 
     public function getConnection()
     {

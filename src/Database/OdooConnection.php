@@ -12,16 +12,26 @@ class OdooConnection extends Connection
     public function select($query, $bindings = [], $useReadPdo = true)
     {
         $data = OdooJsonRpc::execute_kw(
-            'res.partner',
-            'search_read',
-            [],
-            [
-                'fields' => ['id', 'name'],
-                // 'domain' => $domain,
-                'limit' => 5,
-            ],
+            $query['model'],
+            $query['operation'],
+            $query['filters'],
+            $query['object'],
             $this->config['conection']
         );
+
+        $data = array_map(function ($row) {
+            foreach ($row as $key => $value) {
+                if (is_array($value)) {
+                    if (count($value) > 0) {
+                        $row[$key] = $value[0];
+                    } else {
+                        $row[$key] = null;
+                    }
+                }
+            }
+
+            return $row;
+        }, $data);
 
         return $data;
     }
