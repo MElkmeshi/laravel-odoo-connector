@@ -21,6 +21,7 @@ class OdooModel extends Model
      * Get all of the models from the database.
      *
      * @param  array|string  $columns
+     * @param  int  $chunks
      * @return \Illuminate\Database\Eloquent\Collection<int, static>
      */
     public static function get_all($columns = ['*'], $chunks = 500)

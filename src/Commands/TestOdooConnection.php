@@ -124,6 +124,8 @@ class TestOdooConnection extends Command
             })
             ->toArray();
 
+        $z = ProductProduct::get_all('id');
+
         return Command::SUCCESS;
     }
 }
