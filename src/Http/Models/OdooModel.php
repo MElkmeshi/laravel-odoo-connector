@@ -6,6 +6,7 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Sefirosweb\LaravelOdooConnector\Rpc\OdooJsonRpc;
 
 class OdooModel extends Model
 {
@@ -45,5 +46,30 @@ class OdooModel extends Model
         }
 
         return $response;
+    }
+
+    public function action(string $action)
+    {
+        if (!$this->id) {
+            throw new \Exception('The model must have an id to perform this action');
+        }
+
+        OdooJsonRpc::execute_kw(
+            $this->getTable(),
+            $action,
+            [
+                [$this->id]
+            ]
+        );
+    }
+
+    public static function model_action(string $action, array $args)
+    {
+        $instance = new static();
+        return OdooJsonRpc::execute_kw(
+            $instance->getTable(),
+            $action,
+            $args
+        );
     }
 }

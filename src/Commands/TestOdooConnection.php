@@ -10,6 +10,7 @@ use Sefirosweb\LaravelOdooConnector\Http\Models\MrpBomLine;
 use Sefirosweb\LaravelOdooConnector\Http\Models\ProductProduct;
 use Sefirosweb\LaravelOdooConnector\Http\Models\ProductTemplate;
 use Illuminate\Support\Str;
+use Sefirosweb\LaravelOdooConnector\Http\Models\SaleOrder;
 
 class TestOdooConnection extends Command
 {
@@ -125,6 +126,12 @@ class TestOdooConnection extends Command
             ->toArray();
 
         $z = ProductProduct::get_all('id');
+
+        $saleOrder = SaleOrder::select('id', 'state', 'name')->where('state', '=', 'draft')->first();
+        if ($saleOrder) {
+            // $res = $saleOrder->action('action_confirm');
+            SaleOrder::model_action('action_confirm', [[$saleOrder->id]]);
+        }
 
         return Command::SUCCESS;
     }

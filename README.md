@@ -166,7 +166,7 @@ $sale_order->action('action_confirm');
 ```
 
 For custom actions you can provide more data;
-    
+
 ```php
 $args = [['id' => 1]];
 SaleOrder::model_action('action_custom', $args);
