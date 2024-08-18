@@ -6,7 +6,7 @@ Driver to connect Odoo using ORM of laravel
 You can install the package via composer:
 
 ```
-composer require sefirosweb/laravel-access-list
+composer require sefirosweb/laravel-odoo-connector
 ```
 
 ## Add in database.php the configuration for odoo
