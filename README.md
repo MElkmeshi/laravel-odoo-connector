@@ -1,5 +1,26 @@
 # laravel-odoo-connector
-Driver to connect Odoo using ORM of laravel
+
+Driver to connect Odoo using ORM of laravel, it is based in JSON RPC. 
+
+[Odoo Web Services Documentation JSON RPC](https://www.odoo.com/documentation/master/developer/howtos/web_services.html).
+
+## Why use laravel-odoo-connector instead a postgresql connection?
+It seems that it is easier to connect directly to the postgres database instead of using laravel-odoo-connector (based on json-rpc)
+
+The advantage is that when you execute actions like "modify" or "create" objects, odoo has triggers that fire automated actions,
+
+If you execute this in a raw postgress statement these events / actions will not be executed, so it is important to follow the odoo workflow, and odoo provides us with json-rpc to be able to perform these actions,
+
+For example you could have a trigger in odoo that sends the invoice to the client when it is created,
+
+Also laravel-odoo-connector provides the ability to execute model "actions",
+
+For example once the SaleOrder is created it can be confirmed
+```php
+$sale_order = SaleOrder::find(1);
+$sale_order->action('action_confirm');
+```
+It triggers the button "confirm" in the [odoo model](https://github.com/odoo/odoo/blob/a80f9a4be4c4da8980067d1ba9beca53b431f83b/addons/sale/models/sale_order.py#L918)
 
 ## Installation - Composer
 
@@ -135,3 +156,21 @@ If you need to get all records, you can use the method `get_all` in the model, t
 ```php
 $products = ProductProduct::get_all('id', 'name', 100);
 ```
+
+## Model Actions
+You can execute actions of the model, for example, confirm a sale order
+
+```php
+$sale_order = SaleOrder::find(1);
+$sale_order->action('action_confirm');
+```
+
+For custom actions you can provide more data;
+    
+```php
+$args = [['id' => 1]];
+SaleOrder::model_action('action_custom', $args);
+```
+
+## TODOS
+ * Add the rest of models of Odoo (pos, pos_line...)
