@@ -17,5 +17,6 @@ return [
     'ResLang' => Sefirosweb\LaravelOdooConnector\Http\Models\ResLang::class,
     'ResPartner' => Sefirosweb\LaravelOdooConnector\Http\Models\ResPartner::class,
     'SaleOrder' => Sefirosweb\LaravelOdooConnector\Http\Models\SaleOrder::class,
+    'SaleOrderLine' => Sefirosweb\LaravelOdooConnector\Http\Models\SaleOrderLine::class,
     'UomUom' => Sefirosweb\LaravelOdooConnector\Http\Models\UomUom::class,
 ];
