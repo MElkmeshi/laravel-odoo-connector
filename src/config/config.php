@@ -18,5 +18,6 @@ return [
     'ResPartner' => Sefirosweb\LaravelOdooConnector\Http\Models\ResPartner::class,
     'SaleOrder' => Sefirosweb\LaravelOdooConnector\Http\Models\SaleOrder::class,
     'SaleOrderLine' => Sefirosweb\LaravelOdooConnector\Http\Models\SaleOrderLine::class,
+    'StockRoute' => Sefirosweb\LaravelOdooConnector\Http\Models\StockRoute::class,
     'UomUom' => Sefirosweb\LaravelOdooConnector\Http\Models\UomUom::class,
 ];
