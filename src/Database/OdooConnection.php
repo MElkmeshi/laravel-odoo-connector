@@ -19,20 +19,6 @@ class OdooConnection extends Connection
             $this->config['conection']
         );
 
-        $data = array_map(function ($row) {
-            foreach ($row as $key => $value) {
-                if (is_array($value)) {
-                    if (count($value) === 2) {
-                        $row[$key] = $value[0];
-                    } else {
-                        unset($row[$key]);
-                    }
-                }
-            }
-
-            return $row;
-        }, $data);
-
         return $data;
     }
 

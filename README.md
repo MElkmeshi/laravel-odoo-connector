@@ -174,3 +174,4 @@ SaleOrder::model_action('action_custom', $args);
 
 ## TODOS
  * Add the rest of models of Odoo (pos, pos_line...)
+ * Add tests

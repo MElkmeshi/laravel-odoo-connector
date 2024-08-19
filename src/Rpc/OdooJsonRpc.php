@@ -6,7 +6,6 @@ namespace Sefirosweb\LaravelOdooConnector\Rpc;
 
 use Exception;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
 
 class OdooJsonRpc
 {
@@ -42,7 +41,7 @@ class OdooJsonRpc
         return $instance->conections[$connection];
     }
 
-    public static function execute_kw($model, $operation, $params = [], $object = [], $connection = 'odoo', $cache = false)
+    public static function execute_kw($model, $operation, $params = [], $object = [], $connection = 'odoo')
     {
         self::$id++;
         $connection = self::get_connection($connection);
@@ -71,14 +70,7 @@ class OdooJsonRpc
             "id" => self::$id
         ];
 
-        if ($cache) {
-            $response = Cache::get(self::cache_key($query), function () use ($query, $timeout, $connection) {
-                return Http::timeout($timeout)->accept('application/json')->post($connection->url . '/jsonrpc', $query)->json();
-            });
-        } else {
-            $response = Http::timeout($timeout)->accept('application/json')->post($connection->url . '/jsonrpc', $query)->json();
-        }
-
+        $response = Http::timeout($timeout)->accept('application/json')->post($connection->url . '/jsonrpc', $query)->json();
 
         if (!$response) {
             throw new Exception('Cant connect to to odoo server!');
@@ -89,10 +81,5 @@ class OdooJsonRpc
         }
 
         return isset($response['result']) ? $response['result'] : true;
-    }
-
-    private static function cache_key($options)
-    {
-        return 'Odoo_cache_' . md5(json_encode($options));
     }
 }

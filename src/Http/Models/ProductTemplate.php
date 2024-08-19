@@ -29,6 +29,6 @@ class ProductTemplate extends OdooModel
     public function stock_routes(): BelongsToMany
     {
         $relation = config('laravel-odoo-connector.StockRoute');
-        return $this->belongsToMany($relation, 'stock_route_product', 'product_id', 'route_id');
+        return $this->belongsToMany($relation, 'not_needed', 'product_ids', 'route_ids');
     }
 }
