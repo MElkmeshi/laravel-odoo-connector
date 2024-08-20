@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Sefirosweb\LaravelOdooConnector\Commands;
 
 use Illuminate\Console\Command;
+use Sefirosweb\LaravelOdooConnector\Http\Models\MrpImmediateProductionLine;
+use Sefirosweb\LaravelOdooConnector\Http\Models\MrpProduction;
 use Sefirosweb\LaravelOdooConnector\Http\Models\ProductProduct;
 use Sefirosweb\LaravelOdooConnector\Http\Models\SaleOrder;
 
@@ -42,8 +44,13 @@ class TestOdooConnection extends Command
     public function handle()
     {
 
-        // $a = SaleOrder::first()->sale_order_lines;
-        // dd($a->toArray());
+        $a = MrpProduction::first()->mrp_immediate_production_lines;
+        if (!$a) {
+            $this->error('No data found');
+            return Command::FAILURE;
+        }
+
+        dd($a->toArray());
         return Command::SUCCESS;
     }
 }
