@@ -6,9 +6,9 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
-class AccountTax extends OdooModel
+class StockLocation extends OdooModel
 {
     use SoftDeleteOdoo;
 
-    protected $table = 'account.tax';
+    protected $table = 'stock.location';
 }
