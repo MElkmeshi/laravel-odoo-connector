@@ -75,13 +75,14 @@ class OdooModel extends Model
         );
     }
 
-    public static function model_action(string $action, array $args)
+    public static function model_action(string $action, array $args = [], array $kwargs = [])
     {
         $instance = new static();
         return OdooJsonRpc::execute_kw(
             $instance->getTable(),
             $action,
-            $args
+            $args,
+            $kwargs
         );
     }
 

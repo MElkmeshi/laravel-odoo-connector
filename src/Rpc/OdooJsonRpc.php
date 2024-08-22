@@ -41,14 +41,18 @@ class OdooJsonRpc
         return $instance->conections[$connection];
     }
 
-    public static function execute_kw($model, $operation, $params = [], $object = [], $connection = 'odoo')
+    public static function execute_kw($model, $operation, $args = [], $kwargs = [], $connection = 'odoo')
     {
         self::$id++;
         $connection = self::get_connection($connection);
         $timeout = $connection->defaultOptions['timeout'] ?? 20;
 
-        if (isset($connection->defaultOptions['context']) && !isset($object['context'])) {
-            $object['context'] = $connection->defaultOptions['context'];
+        if (isset($connection->defaultOptions['context'])) {
+            if (!isset($kwargs['context'])) {
+                $kwargs['context'] = $connection->defaultOptions['context'];
+            } else {
+                $kwargs['context'] = array_merge($kwargs['context'], $connection->defaultOptions['context']);
+            }
         }
 
         $query = [
@@ -63,8 +67,8 @@ class OdooJsonRpc
                     $connection->password,
                     $model,
                     $operation,
-                    $params,
-                    $object
+                    $args,
+                    $kwargs
                 ]
             ],
             "id" => self::$id
