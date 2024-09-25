@@ -175,3 +175,8 @@ SaleOrder::model_action('action_custom', $args);
 ## TODOS
  * Add the rest of models of Odoo (pos, pos_line...)
  * Add tests
+
+## Tests:
+```php
+php artisan test packages/laravel-odoo-connector/tests/Feature/RandomTests.php
+```

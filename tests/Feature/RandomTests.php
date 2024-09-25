@@ -21,6 +21,12 @@ class RandomTests extends TestCase
      */
     public function test_random_Tests()
     {
+        $a = SaleOrder::query()
+            ->first();
+        $b = $a->partner;
+        $b = $a->partner_invoice;
+        $b = $a->partner_shipping;
+
         $a = ProductProduct::query()
             ->firstWhere('default_code', '=', 'WP19038-8')
             ->toArray();
