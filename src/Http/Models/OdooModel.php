@@ -66,7 +66,7 @@ class OdooModel extends Model
             throw new \Exception('The model must have an id to perform this action');
         }
 
-        OdooJsonRpc::execute_kw(
+        return OdooJsonRpc::execute_kw(
             $this->getTable(),
             $action,
             [
