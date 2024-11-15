@@ -35,6 +35,12 @@ class SaleOrder extends OdooModel
         return $this->belongsTo($relation, 'partner_shipping_id', 'id');
     }
 
+    public function stock_pickings(): HasMany
+    {
+        $relation = config('laravel-odoo-connector.StockPicking');
+        return $this->hasMany($relation, 'sale_id', 'id');
+    }
+
     public function action_cancel()
     {
         $saleOrderCancel = new SaleOrderCancel();

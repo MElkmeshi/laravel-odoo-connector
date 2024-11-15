@@ -22,6 +22,7 @@ return [
     'SaleOrder' => Sefirosweb\LaravelOdooConnector\Http\Models\SaleOrder::class,
     'SaleOrderLine' => Sefirosweb\LaravelOdooConnector\Http\Models\SaleOrderLine::class,
     'StockLocation' => Sefirosweb\LaravelOdooConnector\Http\Models\StockLocation::class,
+    'StockMove' => Sefirosweb\LaravelOdooConnector\Http\Models\StockMove::class,
     'StockMoveLine' => Sefirosweb\LaravelOdooConnector\Http\Models\StockMoveLine::class,
     'StockPicking' => Sefirosweb\LaravelOdooConnector\Http\Models\StockPicking::class,
     'StockPickingType' => Sefirosweb\LaravelOdooConnector\Http\Models\StockPickingType::class,
