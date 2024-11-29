@@ -10,7 +10,10 @@ use Sefirosweb\LaravelOdooConnector\Http\Models\ProductProduct;
 use Sefirosweb\LaravelOdooConnector\Http\Models\ProductTemplate;
 use Tests\TestCase;
 use Illuminate\Support\Str;
+use Sefirosweb\LaravelOdooConnector\Http\Models\PurchaseOrder;
+use Sefirosweb\LaravelOdooConnector\Http\Models\PurchaseOrderLine;
 use Sefirosweb\LaravelOdooConnector\Http\Models\SaleOrder;
+use Sefirosweb\LaravelOdooConnector\Http\Models\SaleOrderLine;
 
 class RandomTests extends TestCase
 {
@@ -21,6 +24,11 @@ class RandomTests extends TestCase
      */
     public function test_random_Tests()
     {
+        $a = SaleOrderLine::query()->first()->purchase_order_lines->first()->sale_order;
+
+        $line = $a->sale_order_lines->first();
+
+        /*
         $a = SaleOrder::query()
             ->first();
         $b = $a->partner;
@@ -124,5 +132,6 @@ class RandomTests extends TestCase
             ->get();
 
         $a = ProductProduct::limit(2)->with('product_template')->get();
+        */
     }
 }

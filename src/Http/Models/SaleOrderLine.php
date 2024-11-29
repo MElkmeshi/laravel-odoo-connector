@@ -28,4 +28,10 @@ class SaleOrderLine extends OdooModel
         $relation = config('laravel-odoo-connector.StockMove');
         return $this->hasMany($relation, 'sale_line_id', 'id');
     }
+
+    public function purchase_order_lines(): HasMany
+    {
+        $relation = config('laravel-odoo-connector.PurchaseOrderLine');
+        return $this->hasMany($relation, 'sale_line_id', 'id');
+    }
 }
