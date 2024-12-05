@@ -31,4 +31,10 @@ class ProductTemplate extends OdooModel
         $relation = config('laravel-odoo-connector.StockRoute');
         return $this->belongsToMany($relation, 'not_needed', 'product_ids', 'route_ids');
     }
+
+    public function product_supplierinfos(): HasMany
+    {
+        $relation = config('laravel-odoo-connector.ProductSupplierinfo');
+        return $this->hasMany($relation, 'product_tmpl_id', 'id');
+    }
 }

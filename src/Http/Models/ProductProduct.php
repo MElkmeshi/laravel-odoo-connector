@@ -25,4 +25,10 @@ class ProductProduct extends OdooModel
         $relation = config('laravel-odoo-connector.MrpBom');
         return $this->hasMany($relation, 'product_id', 'id');
     }
+
+    public function product_supplierinfos(): HasMany
+    {
+        $relation = config('laravel-odoo-connector.ProductSupplierinfo');
+        return $this->hasMany($relation, 'product_id', 'id');
+    }
 }
