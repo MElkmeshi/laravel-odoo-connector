@@ -17,7 +17,7 @@ class ProductProduct extends OdooModel
     public function product_template(): BelongsTo
     {
         $relation = config('laravel-odoo-connector.ProductTemplate');
-        return $this->belongsTo($relation, 'product_tmpl_id', 'id');
+        return $this->belongsTo($relation, 'product_tmpl_id', 'id')->withTrashed();
     }
 
     public function mrp_bom(): HasMany

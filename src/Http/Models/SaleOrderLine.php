@@ -20,7 +20,7 @@ class SaleOrderLine extends OdooModel
     public function product_product(): BelongsTo
     {
         $relation = config('laravel-odoo-connector.ProductProduct');
-        return $this->belongsTo($relation, 'product_id', 'id');
+        return $this->belongsTo($relation, 'product_id', 'id')->withTrashed();
     }
 
     public function stock_moves(): HasMany
