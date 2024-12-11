@@ -5,6 +5,8 @@ return [
     'AccountPaymentMode' => Sefirosweb\LaravelOdooConnector\Http\Models\AccountPaymentMode::class,
     'AccountPaymentTerm' => Sefirosweb\LaravelOdooConnector\Http\Models\AccountPaymentTerm::class,
     'AccountTax' => Sefirosweb\LaravelOdooConnector\Http\Models\AccountTax::class,
+    'IrModel' => Sefirosweb\LaravelOdooConnector\Http\Models\IrModel::class,
+    'MailActivity' => Sefirosweb\LaravelOdooConnector\Http\Models\MailActivity::class,
     'MrpBom' => Sefirosweb\LaravelOdooConnector\Http\Models\MrpBom::class,
     'MrpBomLine' => Sefirosweb\LaravelOdooConnector\Http\Models\MrpBomLine::class,
     'MrpImmediateProduction' => Sefirosweb\LaravelOdooConnector\Http\Models\MrpImmediateProduction::class,
