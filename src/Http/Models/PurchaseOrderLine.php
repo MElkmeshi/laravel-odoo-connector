@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Sefirosweb\LaravelOdooConnector\Database\Relelations\HasMany;
 
 class PurchaseOrderLine extends OdooModel
 {
@@ -32,5 +33,11 @@ class PurchaseOrderLine extends OdooModel
     {
         $relation = config('laravel-odoo-connector.SaleOrderLine');
         return $this->belongsTo($relation, 'sale_line_id', 'id');
+    }
+
+    public function stock_moves(): HasMany
+    {
+        $relation = config('laravel-odoo-connector.StockMove');
+        return $this->hasMany($relation, 'purchase_line_id', 'id');
     }
 }
