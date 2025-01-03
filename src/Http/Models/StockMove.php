@@ -28,4 +28,10 @@ class StockMove extends OdooModel
         $relation = config('laravel-odoo-connector.SaleOrderLine');
         return $this->belongsTo($relation, 'sale_line_id', 'id');
     }
+
+    public function product_product(): BelongsTo
+    {
+        $relation = config('laravel-odoo-connector.ProductProduct');
+        return $this->belongsTo($relation, 'product_id', 'id');
+    }
 }

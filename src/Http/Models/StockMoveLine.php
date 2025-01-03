@@ -22,7 +22,7 @@ class StockMoveLine extends OdooModel
         return $this->belongsTo($relation, 'picking_id', 'id');
     }
 
-    public function product(): BelongsTo
+    public function product_product(): BelongsTo
     {
         $relation = config('laravel-odoo-connector.ProductProduct');
         return $this->belongsTo($relation, 'product_id', 'id')->withTrashed();
