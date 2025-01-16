@@ -2,6 +2,8 @@
 
 return [
     'AccountFiscalPosition' => Sefirosweb\LaravelOdooConnector\Http\Models\AccountFiscalPosition::class,
+    'AccountMove' => Sefirosweb\LaravelOdooConnector\Http\Models\AccountMove::class,
+    'AccountMoveLine' => Sefirosweb\LaravelOdooConnector\Http\Models\AccountMoveLine::class,
     'AccountPaymentMode' => Sefirosweb\LaravelOdooConnector\Http\Models\AccountPaymentMode::class,
     'AccountPaymentTerm' => Sefirosweb\LaravelOdooConnector\Http\Models\AccountPaymentTerm::class,
     'AccountTax' => Sefirosweb\LaravelOdooConnector\Http\Models\AccountTax::class,
