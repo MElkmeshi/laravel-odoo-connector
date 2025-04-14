@@ -15,6 +15,13 @@ class ResPartner extends OdooModel
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(ResUser::class, 'user_id', 'id')->withTrashed();
+        $relation = config('laravel-odoo-connector.ResUser');
+        return $this->belongsTo($relation, 'user_id', 'id')->withTrashed();
+    }
+
+    public function team(): BelongsTo
+    {
+        $relation = config('laravel-odoo-connector.CrmTeam');
+        return $this->belongsTo($relation, 'team_id', 'id')->withTrashed();
     }
 }

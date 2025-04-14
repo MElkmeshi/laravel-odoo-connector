@@ -15,6 +15,7 @@ class ResUser extends OdooModel
 
     public function partners(): HasMany
     {
-        return $this->hasMany(ResPartner::class, 'user_id', 'id')->withTrashed();
+        $relation = config('laravel-odoo-connector.ResPartner');
+        return $this->hasMany($relation, 'user_id', 'id')->withTrashed();
     }
 }
