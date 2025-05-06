@@ -27,6 +27,7 @@ return [
     'ResCountry' => Sefirosweb\LaravelOdooConnector\Http\Models\ResCountry::class,
     'ResLang' => Sefirosweb\LaravelOdooConnector\Http\Models\ResLang::class,
     'ResPartner' => Sefirosweb\LaravelOdooConnector\Http\Models\ResPartner::class,
+    'ResPartnerCategory' => Sefirosweb\LaravelOdooConnector\Http\Models\ResPartnerCategory::class,
     'ResUser' => Sefirosweb\LaravelOdooConnector\Http\Models\ResUser::class,
     'SaleOrder' => Sefirosweb\LaravelOdooConnector\Http\Models\SaleOrder::class,
     'SaleOrderLine' => Sefirosweb\LaravelOdooConnector\Http\Models\SaleOrderLine::class,
