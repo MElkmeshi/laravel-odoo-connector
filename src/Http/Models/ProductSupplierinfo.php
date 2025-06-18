@@ -21,4 +21,10 @@ class ProductSupplierinfo extends OdooModel
         $relation = config('laravel-odoo-connector.ProductTemplate');
         return $this->belongsTo($relation, 'product_tmpl_id', 'id')->withTrashed();
     }
+
+    public function partner(): BelongsTo
+    {
+        $relation = config('laravel-odoo-connector.ResPartner');
+        return $this->belongsTo($relation, 'partner_id', 'id')->withTrashed();
+    }
 }
