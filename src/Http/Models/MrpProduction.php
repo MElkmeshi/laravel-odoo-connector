@@ -24,7 +24,7 @@ class MrpProduction extends OdooModel
         return $this->hasMany($relation, 'production_id', 'id');
     }
 
-    public function stock_moves(): BelongsToMany
+    public function component_details(): BelongsToMany
     {
         $relation = config('laravel-odoo-connector.StockMove');
         return $this->belongsToMany($relation, 'not_needed', 'raw_material_production_id', 'move_raw_ids');
