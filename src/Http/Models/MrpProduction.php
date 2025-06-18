@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MrpProduction extends OdooModel
@@ -21,5 +22,11 @@ class MrpProduction extends OdooModel
     {
         $relation = config('laravel-odoo-connector.MrpImmediateProductionLine');
         return $this->hasMany($relation, 'production_id', 'id');
+    }
+
+    public function stock_moves(): BelongsToMany
+    {
+        $relation = config('laravel-odoo-connector.StockMove');
+        return $this->belongsToMany($relation, 'not_needed', 'raw_material_production_id', 'move_raw_ids');
     }
 }
