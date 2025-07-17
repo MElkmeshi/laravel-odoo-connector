@@ -55,6 +55,9 @@ class BelongsTo extends BaseBelongsTo
         // and match back onto their children using these keys of the dictionary and
         // the primary key of the children to map them onto the correct instances.
         foreach ($models as $model) {
+            if (!$model->{$foreign}) {
+                continue;
+            }
             $attribute = $this->getDictionaryKey($model->{$foreign}[0] ?? false);
 
             if (isset($dictionary[$attribute])) {
