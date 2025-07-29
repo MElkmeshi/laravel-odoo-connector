@@ -60,7 +60,7 @@ class OdooModel extends Model
         return $response;
     }
 
-    public function action(string $action)
+    public function action(string $action, array $kwargs = [])
     {
         if (!$this->id) {
             throw new \Exception('The model must have an id to perform this action');
@@ -70,7 +70,8 @@ class OdooModel extends Model
             $this->getTable(),
             $action,
             [
-                [$this->id]
+                [$this->id],
+                $kwargs
             ]
         );
     }
