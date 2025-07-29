@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-
 use Sefirosweb\LaravelOdooConnector\Database\Relelations\BelongsTo;
 use Sefirosweb\LaravelOdooConnector\Database\Relelations\BelongsToMany;
 use Sefirosweb\LaravelOdooConnector\Database\Relelations\HasMany;
@@ -60,19 +59,24 @@ class OdooModel extends Model
         return $response;
     }
 
-    public function action(string $action, array $kwargs = [])
+    public function action(string $action, $kwargs = null)
     {
         if (!$this->id) {
             throw new \Exception('The model must have an id to perform this action');
         }
 
+        $dataToSend =  [
+            [$this->id],
+        ];
+
+        if ($kwargs !== null) {
+            $dataToSend = array_merge($dataToSend, $kwargs);
+        }
+
         return OdooJsonRpc::execute_kw(
             $this->getTable(),
             $action,
-            [
-                [$this->id],
-                $kwargs
-            ]
+            $dataToSend
         );
     }
 
