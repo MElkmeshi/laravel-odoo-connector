@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Sefirosweb\LaravelOdooConnector\Database\OdooEloquentBuilder;
 use Sefirosweb\LaravelOdooConnector\Database\Relelations\BelongsTo;
 use Sefirosweb\LaravelOdooConnector\Database\Relelations\BelongsToMany;
 use Sefirosweb\LaravelOdooConnector\Database\Relelations\HasMany;
@@ -134,5 +135,10 @@ class OdooModel extends Model
     protected function newMorphToMany(Builder $query, Model $parent, $name, $table, $foreignPivotKey, $relatedPivotKey, $parentKey, $relatedKey, $relationName = null, $inverse = false)
     {
         return new MorphToMany($query, $parent, $name, $table, $foreignPivotKey, $relatedPivotKey, $parentKey, $relatedKey, $relationName, $inverse);
+    }
+
+    public function newEloquentBuilder($query)
+    {
+        return new OdooEloquentBuilder($query);
     }
 }
