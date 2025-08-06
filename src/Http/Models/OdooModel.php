@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Sefirosweb\LaravelOdooConnector\Database\OdooEloquentBuilder;
 use Sefirosweb\LaravelOdooConnector\Database\Relelations\BelongsTo;
 use Sefirosweb\LaravelOdooConnector\Database\Relelations\BelongsToMany;
 use Sefirosweb\LaravelOdooConnector\Database\Relelations\HasMany;
@@ -86,6 +87,22 @@ class OdooModel extends Model
         return OdooJsonRpc::execute_kw(
             $instance->getTable(),
             $action,
+            $args,
+            $kwargs
+        );
+    }
+
+    public static function groupBy(
+        array $domain,
+        array $fields,
+        array $groupBy,
+        array $kwargs = []
+    ) {
+        $instance = new static;
+        $args = [$domain, $fields, $groupBy];
+        return OdooJsonRpc::execute_kw(
+            $instance->getTable(),
+            'read_group',
             $args,
             $kwargs
         );
