@@ -41,4 +41,18 @@ class OdooEloquentBuilder extends Builder
             ]
         );
     }
+    public function forPage($page, $perPage = 15)
+    {
+        $offset = ($page - 1) * $perPage;
+        return $this->offset($offset)->limit($perPage);
+    }
+    public function chunk($size, $callback)
+    {
+        $page = 1;
+
+        do {
+            $results = $this->forPage($page, $size)->get();
+            $page++;
+        } while ($results->isNotEmpty() && $callback($results, $page) !== false);
+    }
 }
