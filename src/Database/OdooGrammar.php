@@ -34,7 +34,14 @@ class OdooGrammar extends BaseGrammar
                 'offset' => $query->offset,
             ],
         ];
-
+        
+        if (!empty($query->orders)) {
+            $order = collect($query->orders)
+                ->map(fn($o) => $o['column'].' '.strtoupper($o['direction']))
+                ->join(',');
+            $jsonRpc['object']['order'] = $order;
+        }
+        
         return $jsonRpc;
     }
 
