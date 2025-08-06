@@ -139,6 +139,11 @@ class OdooGrammar extends BaseGrammar
                         $filters = array_merge($filters, $nestedFilters);
                     }
                     continue 2; // Skip the default case
+                case 'Between':
+                    $col = str_replace($query->from.'.', '', $where['column']);
+                    $filters[] = [$col, '>=', $where['values'][0]];
+                    $filters[] = [$col, '<=', $where['values'][1]];
+                    continue 2;
                 default:
                     throw new \Exception("Unsupported where type: " . $where['type']);
             }
