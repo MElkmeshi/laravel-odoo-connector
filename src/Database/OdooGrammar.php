@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Database;
 
+use Illuminate\Database\Connection;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\Grammars\Grammar as BaseGrammar;
 
 class OdooGrammar extends BaseGrammar
 {
+    public function __construct(Connection $connection)
+    {
+        parent::__construct($connection);
+    }
+
     public function compileSelect(Builder $query)
     {
         // $oldSql = parent::compileSelect($query);
