@@ -17,31 +17,79 @@ class OdooGrammar extends BaseGrammar
 
     public function compileSelect(Builder $query)
     {
-        // $oldSql = parent::compileSelect($query);
-        $columns = $query->columns;
+        $columns = $this->normalizeColumns($query, $query->columns ?? []);
 
-        if (empty($columns)) {
-            $columns = [];
+        $domain = $this->convertWheresToOdooFilters($query, $query->wheres ?? []);
+
+        $groupby = [];
+        if (!empty($query->groups)) {
+            foreach ($query->groups as $g) {
+                $groupby[] = str_replace($query->from.'.', '', $g);
+            }
         }
 
-        if ($query->columns === ['*']) {
-            $columns = [];
+        $hasAgg = false;
+        foreach ($columns as $c) {
+            if (strpos($c, ':') !== false) { $hasAgg = true; break; }
         }
 
-        $params = $this->convertWheresToOdooFilters($query, $query->wheres);
+        if ($hasAgg || count($groupby)) {
+            $fields = $columns;
 
-        $jsonRpc = [
+            $orderby = $this->compileGroupByOrder($query->orders ?? null, $query);
+
+            return [
+                'model' => $query->from,
+                'operation' => 'read_group',
+                'params' => [$domain, $fields, $groupby],
+                'object' => array_filter([
+                    'limit' => $query->limit,
+                    'offset' => $query->offset,
+                    'orderby' => $orderby,
+                    'lazy' => false,
+                ], fn($v) => $v !== null),
+            ];
+        }
+
+        if (empty($columns) || $columns === ['*']) { $columns = []; }
+
+        return [
             'model' => $query->from,
             'operation' => 'search_read',
-            'params' => [$params],
+            'params' => [$domain],
             'object' => [
                 'fields' => $columns,
                 'limit' => $query->limit,
                 'offset' => $query->offset,
             ],
         ];
+    }
 
-        return $jsonRpc;
+    protected function normalizeColumns(Builder $query, array $cols = null): array
+    {
+        $cols = $cols ?? [];
+        if ($cols === ['*']) return [];
+
+        return array_map(function ($c) use ($query) {
+            if (strpos($c, ':') !== false) {
+                [$field, $func] = explode(':', $c, 2);
+                $field = str_replace($query->from.'.', '', $field);
+                return $field . ':' . $func;
+            }
+            return str_replace($query->from.'.', '', $c);
+        }, $cols);
+    }
+
+    protected function compileGroupByOrder(?array $orders, Builder $query): ?string
+    {
+        if (!$orders || !count($orders)) return null;
+        $parts = [];
+        foreach ($orders as $o) {
+            $col = str_replace($query->from.'.', '', $o['column']);
+            $dir = strtolower($o['direction'] ?? 'asc');
+            $parts[] = $col.' '.$dir;
+        }
+        return implode(',', $parts);
     }
 
     public function compileInsert(Builder $query, array $values)
