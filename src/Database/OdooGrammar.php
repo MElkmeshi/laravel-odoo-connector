@@ -12,7 +12,9 @@ class OdooGrammar extends BaseGrammar
 {
     public function __construct(Connection $connection)
     {
-        parent::__construct($connection);
+        if (version_compare(app()->version(), '12.0', '>=')) {
+            parent::__construct($connection);
+        }
     }
 
     public function compileSelect(Builder $query)
