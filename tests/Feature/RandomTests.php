@@ -24,7 +24,8 @@ class RandomTests extends TestCase
      */
     public function test_random_Tests()
     {
-        $a = SaleOrderLine::query()->first()->purchase_order_lines->first()->sale_order;
+        $a = SaleOrderLine::query()->first();
+        dd($a->toArray());
 
         $line = $a->sale_order_lines->first();
 
