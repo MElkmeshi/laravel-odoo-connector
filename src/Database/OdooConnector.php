@@ -18,7 +18,7 @@ class OdooConnector
         $this->config = $config;
 
         $connection = new OdooConnection($pdo, $config['database'], '', $config);
-        $connection->setQueryGrammar(new OdooGrammar);
+        $connection->setQueryGrammar(new OdooGrammar($connection));
         return $connection;
     }
 }
