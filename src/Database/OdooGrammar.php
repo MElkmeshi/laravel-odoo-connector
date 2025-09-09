@@ -10,6 +10,21 @@ use Illuminate\Database\Query\Grammars\Grammar as BaseGrammar;
 
 class OdooGrammar extends BaseGrammar
 {
+    protected $operators = [
+        '=',
+        '!=',
+        '>',
+        '>=',
+        '<',
+        '<=',
+        'like',
+        'not like',
+        'ilike',
+        'not ilike',
+        'child_of',
+        'parent_of',
+    ];
+
     public function __construct(Connection $connection)
     {
         if (version_compare(app()->version(), '12.0', '>=')) {
@@ -184,6 +199,10 @@ class OdooGrammar extends BaseGrammar
             '!=' => '!=',
             'like' => 'ilike',
             'not like' => 'not ilike',
+            'ilike' => 'ilike',
+            'not ilike' => 'not ilike',
+            'child_of' => 'child_of',
+            'parent_of' => 'parent_of',
         ];
 
         return $operators[$operator] ?? $operator;
