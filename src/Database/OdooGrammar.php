@@ -34,84 +34,70 @@ class OdooGrammar extends BaseGrammar
 
     public function compileSelect(Builder $query)
     {
-        // $oldSql = parent::compileSelect($query);
-        $columns = $query->columns;
-
-        if (empty($columns)) {
-            $columns = [];
-        }
-
+        $columns = $query->columns ?? [];
         if ($query->columns === ['*']) {
             $columns = [];
         }
 
-        $params = $this->convertWheresToOdooFilters($query, $query->wheres);
+        $domain = $this->convertWheresToOdooFilters($query, $query->wheres);
 
-        $jsonRpc = [
-            'model' => $query->from,
-            'operation' => 'search_read',
-            'params' => [$params],
-            'object' => [
-                'fields' => $columns,
-                'limit' => $query->limit,
+        return [
+            'model'  => $query->from,
+            'method' => 'search_read',            // JSON-2 method
+            'body'   => array_filter([
+                'domain' => $domain,
+                'fields' => $columns ?: null,
+                'limit'  => $query->limit,
                 'offset' => $query->offset,
-            ],
+                // 'order' => 'name asc', // add if/when needed
+            ], fn($v) => $v !== null),
         ];
-
-        return $jsonRpc;
     }
 
     public function compileInsert(Builder $query, array $values)
     {
-        $jsonRpc = [
-            'model' => $query->from,
-            'operation' => 'create',
-            'params' => [$values],
-            'object' => [],
+        return [
+            'model'  => $query->from,
+            'method' => 'create',
+            'body'   => ['values' => $values],
         ];
-
-        return $jsonRpc;
     }
 
     public function compileUpdate(Builder $query, array $values)
     {
         $ids = [];
-
         foreach ($query->wheres as $where) {
             if ($where['type'] === 'Basic' && $where['operator'] === '=' && $where['column'] === 'id') {
                 $ids[] = $where['value'];
             }
         }
 
-        $jsonRpc = [
-            'model' => $query->from,
-            'operation' => 'write',
-            'params' => [$ids, $values],
-            'object' => [],
+        return [
+            'model'  => $query->from,
+            'method' => 'write',
+            'body'   => [
+                'ids'    => $ids,
+                'values' => $values,
+            ],
         ];
-
-        return $jsonRpc;
     }
 
     public function compileDelete(Builder $query)
     {
         $ids = [];
-
         foreach ($query->wheres as $where) {
             if ($where['type'] === 'Basic' && $where['operator'] === '=' && $where['column'] === 'id') {
                 $ids[] = $where['value'];
             }
         }
 
-        $jsonRpc = [
-            'model' => $query->from,
-            'operation' => 'unlink',
-            'params' => [$ids],
-            'object' => [],
+        return [
+            'model'  => $query->from,
+            'method' => 'unlink',
+            'body'   => ['ids' => $ids],
         ];
-
-        return $jsonRpc;
     }
+
 
     /**
      * Convert Laravel $wheres to Odoo filters.

@@ -5,60 +5,52 @@ declare(strict_types=1);
 namespace Sefirosweb\LaravelOdooConnector\Database;
 
 use Illuminate\Database\Connection;
-use Sefirosweb\LaravelOdooConnector\Rpc\OdooJsonRpc;
+use Sefirosweb\LaravelOdooConnector\Rpc\OdooJson2;
 
 class OdooConnection extends Connection
 {
     public function select($query, $bindings = [], $useReadPdo = true)
     {
-        $data = OdooJsonRpc::execute_kw(
+        return OdooJson2::call(
             $query['model'],
-            $query['operation'],
-            $query['params'],
-            $query['object'],
+            $query['method'],
+            $query['body'] ?? [],
+            [],
             $this->config['conection']
         );
-
-        return $data;
     }
 
     public function insert($query, $bindings = [])
     {
-        $data = OdooJsonRpc::execute_kw(
+        return OdooJson2::call(
             $query['model'],
-            $query['operation'],
-            $query['params'],
-            $query['object'],
+            $query['method'],
+            $query['body'] ?? [],
+            [],
             $this->config['conection']
         );
-
-        return $data;
     }
 
     public function update($query, $bindings = [])
     {
-        $data = OdooJsonRpc::execute_kw(
+        return OdooJson2::call(
             $query['model'],
-            $query['operation'],
-            $query['params'],
-            $query['object'],
+            $query['method'],
+            $query['body'] ?? [],
+            [],
             $this->config['conection']
         );
-
-        return $data;
     }
 
     public function delete($query, $bindings = [])
     {
-        $data = OdooJsonRpc::execute_kw(
+        return OdooJson2::call(
             $query['model'],
-            $query['operation'],
-            $query['params'],
-            $query['object'],
+            $query['method'],
+            $query['body'] ?? [],
+            [],
             $this->config['conection']
         );
-
-        return $data;
     }
 
     protected function getDefaultPostProcessor()

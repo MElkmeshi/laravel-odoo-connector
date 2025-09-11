@@ -18,8 +18,6 @@ use Sefirosweb\LaravelOdooConnector\Database\Relelations\BelongsTo;
 use Sefirosweb\LaravelOdooConnector\Database\Relelations\BelongsToMany;
 use Sefirosweb\LaravelOdooConnector\Database\Relelations\HasMany;
 
-use Sefirosweb\LaravelOdooConnector\Rpc\OdooJsonRpc;
-
 class OdooModel extends Model
 {
     protected $connection = 'odoo';
@@ -60,36 +58,32 @@ class OdooModel extends Model
         return $response;
     }
 
+
     public function action(string $action, $kwargs = null)
     {
         if (!$this->id) {
             throw new \Exception('The model must have an id to perform this action');
         }
 
-        $dataToSend =  [
-            [$this->id],
-        ];
-
-        if ($kwargs !== null) {
-            $dataToSend = array_merge($dataToSend, $kwargs);
+        $body = ['ids' => [$this->id]];
+        if (is_array($kwargs)) {
+            // JSON-2 uses named arguments; merge them directly
+            $body = array_merge($body, $kwargs);
         }
 
-        return OdooJsonRpc::execute_kw(
-            $this->getTable(),
-            $action,
-            $dataToSend
-        );
+        return OdooJson2::call($this->getTable(), $action, $body);
     }
 
     public static function model_action(string $action, array $args = [], array $kwargs = [])
     {
         $instance = new static();
-        return OdooJsonRpc::execute_kw(
-            $instance->getTable(),
-            $action,
-            $args,
-            $kwargs
-        );
+        // For JSON-2: pass ids in kwargs (named), ignore positional args
+        $body = $kwargs;
+        if (isset($args[0]) && is_array($args[0])) {
+            $body['ids'] = $args[0];
+        }
+
+        return OdooJson2::call($instance->getTable(), $action, $body);
     }
 
     protected function newHasOneThrough(Builder $query, Model $farParent, Model $throughParent, $firstKey, $secondKey, $localKey, $secondLocalKey)
