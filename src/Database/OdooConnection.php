@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Sefirosweb\LaravelOdooConnector\Database;
 
 use Illuminate\Database\Connection;
-use Sefirosweb\LaravelOdooConnector\Rpc\OdooJson2;
+use Sefirosweb\LaravelOdooConnector\Http\OdooJson2;
 
 class OdooConnection extends Connection
 {

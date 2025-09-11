@@ -6,7 +6,7 @@ namespace Sefirosweb\LaravelOdooConnector\Database;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Sefirosweb\LaravelOdooConnector\Rpc\OdooJson2;
+use Sefirosweb\LaravelOdooConnector\Http\OdooJson2;
 
 class OdooEloquentBuilder extends Builder
 {

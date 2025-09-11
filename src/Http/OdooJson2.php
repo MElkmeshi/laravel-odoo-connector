@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sefirosweb\LaravelOdooConnector\Rpc;
+namespace Sefirosweb\LaravelOdooConnector\Http;
 
 use Exception;
 use Illuminate\Support\Facades\Http;
