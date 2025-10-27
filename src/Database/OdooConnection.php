@@ -9,6 +9,11 @@ use Sefirosweb\LaravelOdooConnector\Rpc\OdooJsonRpc;
 
 class OdooConnection extends Connection
 {
+    public function query()
+    {
+        return new OdooQueryBuilder($this, $this->getQueryGrammar(), $this->getPostProcessor());
+    }
+
     public function select($query, $bindings = [], $useReadPdo = true)
     {
         $data = OdooJsonRpc::execute_kw(

@@ -41,29 +41,4 @@ class OdooEloquentBuilder extends Builder
             ]
         );
     }
-
-    public function getCountForPagination($columns = ['*'])
-    {
-        $query = $this->getQuery();
-
-        if (!empty($query->groups) || isset($query->aggregate) || $query->distinct) {
-            return parent::getCountForPagination($columns);
-        }
-
-        $grammar = $query->getGrammar();
-
-        if (!method_exists($grammar, 'convertWheresToOdooFilters')) {
-            return parent::getCountForPagination($columns);
-        }
-
-        $domain = $grammar->convertWheresToOdooFilters($query, $query->wheres ?? []);
-
-        $total = OdooJsonRpc::execute_kw(
-            $this->getModel()->getTable(),
-            'search_count',
-            [$domain]
-        );
-
-        return (int) $total;
-    }
 }
