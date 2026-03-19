@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[Table(table: 'sale.order')]
 class SaleOrder extends OdooModel
 {
-    protected $table = 'sale.order';
-
     public function sale_order_lines(): HasMany
     {
         $relation = config('laravel-odoo-connector.SaleOrderLine');

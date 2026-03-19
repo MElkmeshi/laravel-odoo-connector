@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[Table(table: 'product.supplierinfo')]
 class ProductSupplierinfo extends OdooModel
 {
-    protected $table = 'product.supplierinfo';
-
     public function product_product(): BelongsTo
     {
         $relation = config('laravel-odoo-connector.ProductProduct');

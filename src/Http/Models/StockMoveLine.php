@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[Table(table: 'stock.move.line')]
 class StockMoveLine extends OdooModel
 {
-    protected $table = 'stock.move.line';
-
     public function stock_move(): BelongsTo
     {
         $relation = config('laravel-odoo-connector.StockMove');

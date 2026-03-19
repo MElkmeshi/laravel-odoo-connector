@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[Table(table: 'mrp.bom.line')]
 class MrpBomLine extends OdooModel
 {
-    protected $table = 'mrp.bom.line';
-
     public function mrp_bom(): BelongsTo
     {
         $relation = config('laravel-odoo-connector.MrpBom');

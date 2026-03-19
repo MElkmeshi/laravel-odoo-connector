@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[Table(table: 'mrp.production')]
 class MrpProduction extends OdooModel
 {
-    protected $table = 'mrp.production';
-
     public function product_product(): BelongsTo
     {
         $relation = config('laravel-odoo-connector.ProductProduct');

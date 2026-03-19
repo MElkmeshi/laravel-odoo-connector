@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
+
+#[Table(table: 'stock.quant')]
 class StockQuant extends OdooModel
 {
-    protected $table = 'stock.quant';
 }

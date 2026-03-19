@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
+#[Table(table: 'res.partner.category')]
 class ResPartnerCategory extends OdooModel
 {
     use SoftDeleteOdoo;
-
-    protected $table = 'res.partner.category';
 
     public function partners(): BelongsToMany
     {
