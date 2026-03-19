@@ -6,7 +6,7 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Table;
 
-#[Table(table: 'ir.model')]
+#[Table('ir.model')]
 class IrModel extends OdooModel
 {
 }

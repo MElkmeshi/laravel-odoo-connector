@@ -6,7 +6,7 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Table;
 
-#[Table(table: 'mail.activity')]
+#[Table('mail.activity')]
 class MailActivity extends OdooModel
 {
 }

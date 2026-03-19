@@ -7,7 +7,7 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
-#[Table(table: 'account.payment.mode')]
+#[Table('account.payment.mode')]
 class AccountPaymentMode extends OdooModel
 {
     use SoftDeleteOdoo;

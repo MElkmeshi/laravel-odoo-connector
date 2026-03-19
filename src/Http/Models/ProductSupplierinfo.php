@@ -7,7 +7,7 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Table(table: 'product.supplierinfo')]
+#[Table('product.supplierinfo')]
 class ProductSupplierinfo extends OdooModel
 {
     public function product_product(): BelongsTo

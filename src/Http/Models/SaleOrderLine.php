@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Table(table: 'sale.order.line')]
+#[Table('sale.order.line')]
 class SaleOrderLine extends OdooModel
 {
     public function sale_order(): BelongsTo

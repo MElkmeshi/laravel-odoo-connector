@@ -6,7 +6,7 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Table;
 
-#[Table(table: 'res.country')]
+#[Table('res.country')]
 class ResCountry extends OdooModel
 {
 }

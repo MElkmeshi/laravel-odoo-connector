@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
-#[Table(table: 'stock.route')]
+#[Table('stock.route')]
 class StockRoute extends OdooModel
 {
     use SoftDeleteOdoo;

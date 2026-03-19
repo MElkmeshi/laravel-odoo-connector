@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-#[Table(table: 'account.move.line')]
+#[Table('account.move.line')]
 class AccountMoveLine extends OdooModel
 {
     public function account_move(): BelongsTo

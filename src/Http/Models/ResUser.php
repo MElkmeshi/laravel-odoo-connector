@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
-#[Table(table: 'res.users')]
+#[Table('res.users')]
 class ResUser extends OdooModel
 {
     use SoftDeleteOdoo;

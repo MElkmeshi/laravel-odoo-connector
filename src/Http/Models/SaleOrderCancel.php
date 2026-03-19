@@ -6,7 +6,7 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Table;
 
-#[Table(table: 'sale.order.cancel')]
+#[Table('sale.order.cancel')]
 class SaleOrderCancel extends OdooModel
 {
 }

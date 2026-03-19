@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
-#[Table(table: 'mrp.bom')]
+#[Table('mrp.bom')]
 class MrpBom extends OdooModel
 {
     use SoftDeleteOdoo;

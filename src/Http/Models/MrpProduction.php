@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Table(table: 'mrp.production')]
+#[Table('mrp.production')]
 class MrpProduction extends OdooModel
 {
     public function product_product(): BelongsTo

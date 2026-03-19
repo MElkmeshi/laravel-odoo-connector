@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Table(table: 'stock.move')]
+#[Table('stock.move')]
 class StockMove extends OdooModel
 {
     public function stock_picking(): BelongsTo

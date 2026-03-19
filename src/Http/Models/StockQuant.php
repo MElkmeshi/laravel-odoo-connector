@@ -6,7 +6,7 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Table;
 
-#[Table(table: 'stock.quant')]
+#[Table('stock.quant')]
 class StockQuant extends OdooModel
 {
 }

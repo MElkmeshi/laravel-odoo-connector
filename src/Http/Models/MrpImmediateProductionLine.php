@@ -7,7 +7,7 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Table(table: 'mrp.immediate.production.line')]
+#[Table('mrp.immediate.production.line')]
 class MrpImmediateProductionLine extends OdooModel
 {
     public function mrp_immediate_production(): BelongsTo
