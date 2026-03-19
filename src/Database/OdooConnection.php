@@ -14,7 +14,7 @@ class OdooConnection extends Connection
         return new OdooQueryBuilder($this, $this->getQueryGrammar(), $this->getPostProcessor());
     }
 
-    public function select($query, $bindings = [], $useReadPdo = true)
+    public function select($query, $bindings = [], $useReadPdo = true, array $fetchUsing = [])
     {
         $data = OdooJsonRpc::execute_kw(
             $query['model'],
