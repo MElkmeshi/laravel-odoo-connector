@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[Table(name:'mrp.immediate.production.line')]
 class MrpImmediateProductionLine extends OdooModel
 {
-    protected $table = 'mrp.immediate.production.line';
-
     public function mrp_immediate_production(): BelongsTo
     {
         $relation = config('laravel-odoo-connector.MrpImmediateProduction');

@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
+#[Table(name:'product.template')]
 class ProductTemplate extends OdooModel
 {
     use SoftDeleteOdoo;
-
-    protected $table = 'product.template';
 
     public function product_products(): HasMany
     {

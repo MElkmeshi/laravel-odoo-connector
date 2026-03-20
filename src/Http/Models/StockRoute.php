@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
+#[Table(name:'stock.route')]
 class StockRoute extends OdooModel
 {
-    protected $table = 'stock.route';
     use SoftDeleteOdoo;
 
     public function product_templates(): BelongsToMany

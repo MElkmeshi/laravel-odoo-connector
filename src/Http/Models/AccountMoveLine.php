@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+#[Table(name:'account.move.line')]
 class AccountMoveLine extends OdooModel
 {
-    protected $table = 'account.move.line';
-
     public function account_move(): BelongsTo
     {
         $relation = config('laravel-odoo-connector.AccountMove');

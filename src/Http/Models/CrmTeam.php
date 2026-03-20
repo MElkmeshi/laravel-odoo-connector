@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
+#[Table(name:'crm.team')]
 class CrmTeam extends OdooModel
 {
     use SoftDeleteOdoo;
-
-    protected $table = 'crm.team';
 
     public function partners(): HasMany
     {

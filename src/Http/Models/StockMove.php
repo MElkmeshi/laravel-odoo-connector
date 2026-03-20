@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[Table(name:'stock.move')]
 class StockMove extends OdooModel
 {
-    protected $table = 'stock.move';
-
     public function stock_picking(): BelongsTo
     {
         $relation = config('laravel-odoo-connector.StockPicking');
