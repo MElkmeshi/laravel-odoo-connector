@@ -65,7 +65,7 @@ class OdooGrammar extends BaseGrammar
         ];
     }
 
-    protected function normalizeColumns(Builder $query, array $cols = null): array
+    protected function normalizeColumns(Builder $query, ?array $cols = null): array
     {
         $cols = $cols ?? [];
         if ($cols === ['*']) return [];

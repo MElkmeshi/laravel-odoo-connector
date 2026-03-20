@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Sefirosweb\LaravelOdooConnector\Database\Relelations\HasMany;
 
-#[Table('purchase.order.line')]
+#[Table(name:'purchase.order.line')]
 class PurchaseOrderLine extends OdooModel
 {
     public function purchase_order(): BelongsTo

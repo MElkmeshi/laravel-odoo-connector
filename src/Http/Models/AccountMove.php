@@ -7,7 +7,7 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Table('account.move')]
+#[Table(name:'account.move')]
 class AccountMove extends OdooModel
 {
     public function account_move_lines(): HasMany

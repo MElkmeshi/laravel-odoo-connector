@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
-#[Table('res.partner')]
+#[Table(name:'res.partner')]
 class ResPartner extends OdooModel
 {
     use SoftDeleteOdoo;

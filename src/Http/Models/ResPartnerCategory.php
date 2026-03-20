@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
-#[Table('res.partner.category')]
+#[Table(name:'res.partner.category')]
 class ResPartnerCategory extends OdooModel
 {
     use SoftDeleteOdoo;

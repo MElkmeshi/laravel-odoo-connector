@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
-#[Table('crm.team')]
+#[Table(name:'crm.team')]
 class CrmTeam extends OdooModel
 {
     use SoftDeleteOdoo;

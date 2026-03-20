@@ -7,7 +7,7 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Sefirosweb\LaravelOdooConnector\Http\Traits\SoftDeleteOdoo;
 
-#[Table('stock.picking.type')]
+#[Table(name:'stock.picking.type')]
 class StockPickingType extends OdooModel
 {
     use SoftDeleteOdoo;

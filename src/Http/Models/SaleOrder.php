@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Table('sale.order')]
+#[Table(name:'sale.order')]
 class SaleOrder extends OdooModel
 {
     public function sale_order_lines(): HasMany

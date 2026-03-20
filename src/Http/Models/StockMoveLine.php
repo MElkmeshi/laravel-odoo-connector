@@ -7,7 +7,7 @@ namespace Sefirosweb\LaravelOdooConnector\Http\Models;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Table('stock.move.line')]
+#[Table(name:'stock.move.line')]
 class StockMoveLine extends OdooModel
 {
     public function stock_move(): BelongsTo
